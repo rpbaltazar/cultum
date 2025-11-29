@@ -331,6 +331,30 @@
         });
       });
 
+      document.addEventListener('touchmove', function (ev) {
+        const touch = ev.touches[0]; // first finger
+        const x = touch.clientX;
+        const y = touch.clientY;
+
+        specials.forEach(star => {
+          const rect = star.getBoundingClientRect();
+          if (
+            x >= rect.left &&
+            x <= rect.right &&
+            y >= rect.top &&
+            y <= rect.bottom
+          ) {
+            const id = star.getAttribute('data-id');
+            // mark visited if not already
+            markVisited(id);
+            // add hover effect briefly
+            star.classList.add('hover');
+            setTimeout(() => star.classList.remove('hover'), 300);
+          }
+        });
+      }, { passive: true });
+
+
       // fallback open button
       document.getElementById('openBtn').addEventListener('click', function () {
         tryOpen();
