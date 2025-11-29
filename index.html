@@ -9,31 +9,26 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card" role="main">
-      <h1>Star Field — interact with the special stars</h1>
-      <p class="lead">Hover or touch the three special stars. After you've visited each of the three, a new page will
-        open.</p>
+  <div class="container">
+    <div class="header">
+      <h1>Nell'Universo di Cultum</h1>
+      <h2>Nel nostro universo le rotte ci orientano. Le tre stelle più luminose
+        <br>ti condurranno alla scoperta di nuovi mondi. Scoprile.
+      </h2>
+    </div>
 
-      <div class="scene" aria-hidden="false">
-        <svg id="dot-scene" width="100%" height="360"></svg>
-      </div>
-
-      <div class="open-fallback" id="fallback">
-        <p style="color:var(--muted);margin:8px 0 10px">Automatic opening was blocked by the browser — tap the button to
-          continue.</p>
-        <button class="btn" id="openBtn">Open the target page</button>
-      </div>
-
+    <div class="scene" aria-hidden="false">
+      <svg id="dot-scene" width="100%" height="360"></svg>
     </div>
   </div>
 
   <div class="popup-overlay" id="popup">
     <div class="popup">
       <span class="close-btn" id="popup-close">&times;</span>
-      <h2>Congratulations!</h2>
-      <p>You've won early access to something cool</p>
-      <img id="popup-img" src="img/prize.jpg" alt="Prize image">
+      <img id="popup-img" src="img/presenza.jpeg" alt="Prize image">
+      <h1>Presenza</h1>
+      <p>Piccoli rituali da portare sempre con sé, come un charm per l’anima. Fai scivolare la sfera sui polsi o sulle tempie e
+      lascia che il respiro ritrovi la sua rotta. Tre alchimie che sanno creare una dipendenza gentile.</p>
       <button class="cta-btn" id="popup-cta">Take me there</button>
     </div>
   </div>

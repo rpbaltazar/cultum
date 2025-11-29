@@ -3,7 +3,7 @@
   const DOT_COUNT = 3;       // total dots
   const SPECIAL_COUNT = 3;    // special glowing ones
   const MIN_DISTANCE = 30;    // minimum distance between dots in pixels
-  const WEBSITE = "https://cultumcosmetics.com/products/alchimie-d-incanto";
+  const WEBSITE = "https://cultumcosmetics.com/products/presenza-roll-on-botanico";
 
   const svg = document.getElementById('dot-scene');
   const sceneRect = svg.getBoundingClientRect();
@@ -41,7 +41,7 @@
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute('cx', pos.x);
     circle.setAttribute('cy', pos.y);
-    circle.setAttribute('r', 8); // radius
+    circle.setAttribute('r', 4); // radius
     circle.classList.add('dot');
     circle.dataset.id = `dot-${i + 1}`;
 
@@ -103,15 +103,7 @@
 
   function tryOpen() {
     opened = true;
-    const newWin = window.open(TARGET_URL, '_blank');
-    if (!newWin || newWin.closed === undefined) {
-      // popup blocked — show fallback button
-      const fb = document.getElementById('fallback');
-      fb.style.display = 'block';
-    } else {
-      // focus the new window/tab if possible
-      try { newWin.focus(); } catch (e) { }
-    }
+    window.open(TARGET_URL, '_blank');
   }
 
   function randomElements(arr, n) {
