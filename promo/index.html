@@ -175,49 +175,41 @@
           <!-- Background subtle gradient circle -->
           <rect width="100%" height="100%" fill="none" />
 
-          <!-- a few decorative non-special stars -->
           <g transform="translate(60,60) scale(1.6)">
-            <g class="star" data-id="ns1" tabindex="0" aria-label="star non-special 1">
+            <g class="star" data-id="s1" tabindex="0" aria-label="star 1">
               <use class="star-base" href="#starPath" />
             </g>
           </g>
 
           <g transform="translate(160,120) scale(1.2)">
-            <g class="star" data-id="ns2" tabindex="0" aria-label="star non-special 2">
+            <g class="star" data-id="s2" tabindex="0" aria-label="star 2">
               <use class="star-base" href="#starPath" />
             </g>
           </g>
 
           <g transform="translate(260,50) scale(0.9)">
-            <g class="star" data-id="ns3" tabindex="0" aria-label="star non-special 3">
+            <g class="star" data-id="s3" tabindex="0" aria-label="star 3">
               <use class="star-base" href="#starPath" />
             </g>
           </g>
 
-          <!-- special stars (the three the user must visit) -->
-          <g id="specials">
-            <g transform="translate(420,120) scale(1.5)">
-              <g class="star special" data-id="s1" tabindex="0" role="button" aria-pressed="false"
-                aria-label="special star 1">
-                <use class="star-base" href="#starPath" />
-              </g>
-            </g>
-
-            <g transform="translate(560,70) scale(1.7)">
-              <g class="star special" data-id="s2" tabindex="0" role="button" aria-pressed="false"
-                aria-label="special star 2">
-                <use class="star-base" href="#starPath" />
-              </g>
-            </g>
-
-            <g transform="translate(680,170) scale(1.3)">
-              <g class="star special" data-id="s3" tabindex="0" role="button" aria-pressed="false"
-                aria-label="special star 3">
-                <use class="star-base" href="#starPath" />
-              </g>
+          <g transform="translate(420,120) scale(1.5)">
+            <g class="star" data-id="s4" tabindex="0" aria-label="star 4">
+              <use class="star-base" href="#starPath" />
             </g>
           </g>
 
+          <g transform="translate(560,70) scale(1.7)">
+            <g class="star" data-id="s5" tabindex="0" aria-label="star 5">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
+
+          <g transform="translate(680,170) scale(1.3)">
+            <g class="star" data-id="s6" tabindex="0" aria-label="star 6">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
         </svg>
       </div>
 
@@ -240,12 +232,21 @@
     (function () {
       // URL to open when all three visited. Change as desired.
       const TARGET_URL = 'https://example.com';
+      const SPECIAL_COUNT = 3;
 
-      const specials = Array.from(document.querySelectorAll('.star.special'));
+      const stars = Array.from(document.querySelectorAll('.star'));
+      // console.log(stars);
+      const specials = randomElements(stars, SPECIAL_COUNT);
+      // console.log(specials);
+
       const visited = new Set();
       let opened = false;
 
       function markVisited(id) {
+        console.log(id);
+        console.log(visited.has(id));
+
+
         if (visited.has(id)) return;
         visited.add(id);
         const dot = document.getElementById('dot-' + id);
@@ -274,8 +275,28 @@
         }
       }
 
+      function randomElements(arr, n) {
+        if (n > arr.length) {
+          throw new Error("Requested more elements than available");
+        }
+
+        // Make a copy so we don't mutate the original array
+        const copy = arr.slice();
+        const selected = [];
+
+        for (let i = 0; i < n; i++) {
+          const index = Math.floor(Math.random() * copy.length);
+          selected.push(copy[index]);
+          copy.splice(index, 1); // remove chosen element to avoid duplicates
+        }
+
+        return selected;
+      }
+
       // Add event listeners to special stars
       specials.forEach(function (g) {
+        g.classList.add('special');
+
         const id = g.getAttribute('data-id');
 
         // on hover / pointer enter
