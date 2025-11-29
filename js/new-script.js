@@ -188,12 +188,6 @@
     });
   }, { passive: true });
 
-
-  // fallback open button
-  document.getElementById('openBtn').addEventListener('click', function () {
-    tryOpen();
-  });
-
   // Prevent accidental text selection while tapping/dragging on mobile
   document.addEventListener('touchmove', function (ev) { ev.preventDefault(); }, { passive: false });
 
