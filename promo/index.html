@@ -64,12 +64,20 @@
       max-height: 360px
     }
 
+    /* Pulsating glow animation for all stars */
+    @keyframes starPulse {
+      0%   { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255,215,102,0.3)); }
+      50%  { transform: scale(1.01); filter: drop-shadow(0 0 10px rgba(255,215,102,0.7)); }
+      100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(255,215,102,0.3)); }
+    }
+
     /* star styles */
     .star {
       cursor: pointer;
       transform-origin: center center;
       transition: transform .18s ease, filter .18s ease;
-      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6))
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6));
+      animation: starPulse 2.4s ease-in-out infinite;
     }
 
     .star-base {
