@@ -214,9 +214,9 @@
       </div>
 
       <div class="status" id="status">Special visited:
-        <span class="dot" id="dot-s1"></span>
-        <span class="dot" id="dot-s2"></span>
-        <span class="dot" id="dot-s3"></span>
+        <span class="dot" id="dot-1"></span>
+        <span class="dot" id="dot-2"></span>
+        <span class="dot" id="dot-3"></span>
       </div>
 
       <div class="open-fallback" id="fallback">
@@ -243,13 +243,10 @@
       let opened = false;
 
       function markVisited(id) {
-        console.log(id);
-        console.log(visited.has(id));
-
-
         if (visited.has(id)) return;
         visited.add(id);
-        const dot = document.getElementById('dot-' + id);
+
+        const dot = document.getElementById('dot-' + visited.size);
         if (dot) dot.classList.add('on');
 
         // mark the svg element with visited for styling
@@ -292,6 +289,7 @@
 
         return selected;
       }
+
 
       // Add event listeners to special stars
       specials.forEach(function (g) {
