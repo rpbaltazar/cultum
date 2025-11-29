@@ -9,22 +9,21 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card" role="main">
-      <h1>Star Field — interact with the special stars</h1>
-      <p class="lead">Hover or touch the three special stars. After you've visited each of the three, a new page will
-        open.</p>
+  <div class="container">
+    <div class="header">
+      <h1>Nell'Universo di Cultum</h1>
+      <h2>Nel nostro universo le rotte ci orientano. Le tre stelle più luminose ti condurranno alla scoperta di nuovi mondi.
+      Scoprile.</h2>
+    </div>
 
-      <div class="scene" aria-hidden="false">
-        <svg id="dot-scene" width="100%" height="360"></svg>
-      </div>
+    <div class="scene" aria-hidden="false">
+      <svg id="dot-scene" width="100%" height="360"></svg>
+    </div>
 
-      <div class="open-fallback" id="fallback">
-        <p style="color:var(--muted);margin:8px 0 10px">Automatic opening was blocked by the browser — tap the button to
-          continue.</p>
-        <button class="btn" id="openBtn">Open the target page</button>
-      </div>
-
+    <div class="open-fallback" id="fallback">
+      <p style="color:var(--muted);margin:8px 0 10px">Automatic opening was blocked by the browser — tap the button to
+        continue.</p>
+      <button class="btn" id="openBtn">Open the target page</button>
     </div>
   </div>
 

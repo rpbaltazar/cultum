@@ -8,37 +8,49 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, var(--bg) 0%, #071024 100%);
-  color: #fff
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  /* background: linear-gradient(180deg, var(--bg) 0%, #071024 100%); */
+  color: #fff;
+  background-image: url("/img/bckg.jpeg");
 }
 
-.wrap {
-  min-height: 100%;
+.container {
+  padding: 40px 60px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  box-sizing: border-box
+  flex-direction: column;
+  /* stack rows vertically */
+  gap: 16px;
+  /* spacing between rows */
 }
 
-.card {
-  width: 100%;
-  max-width: 720px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
-  text-align: center
+
+.header {
+  display: flex;
+  flex-direction: column;
+  /* stack title + subtitle */
+  align-items: flex-start;
+  /* align left */
+}
+
+/* Second row: image */
+.scene {
+  display: flex;
+  justify-content: center;
+  /* or flex-start if you want left */
+}
+
+.scene img {
+  max-width: 100%;
+  border-radius: 12px;
 }
 
 h1 {
-  margin: 0 0 12px;
-  font-size: 20px
+  font-size: 30px;
+  font-family: Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif;
 }
 
-p.lead {
-  margin: 0 0 18px;
+h2 {
+  font-size: 18px;
   color: var(--muted)
 }
 
@@ -47,7 +59,7 @@ p.lead {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px
+  padding: 16px;
 }
 
 svg {
@@ -60,16 +72,19 @@ svg {
 @keyframes starPulse {
   0% {
     transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
     -webkit-filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
   }
 
   50% {
     transform: scale(1.01);
+    filter: drop-shadow(0 0 30px rgba(255, 215, 102, 1));
     -webkit-filter: drop-shadow(0 0 30px rgba(255, 215, 102, 1));
   }
 
   100% {
     transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
     -webkit-filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
   }
 }
