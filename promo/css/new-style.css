@@ -108,18 +108,30 @@ svg {
   filter: brightness(1.1)
 }
 
-/* indicators */
-.status {
-  margin-top: 14px;
-  font-size: 14px;
-  color: var(--muted)
+/* Pulsating glow animation for all stars */
+@keyframes starPulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
+  }
+
+  50% {
+    transform: scale(1.01);
+    filter: drop-shadow(0 0 10px rgba(255, 215, 102, 0.7));
+  }
+
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
+  }
 }
 
 .dot {
-  fill: #ffd766;
-  opacity: 0.7;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
+  fill: var(--star);
+  opacity: 0.9;
+  transition: transform .18s ease, filter .18s ease;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6));
+  animation: starPulse 2.4s ease-in-out infinite;
 }
 
 .dot.special.hover {
@@ -129,12 +141,6 @@ svg {
 
 .dot.visited {
   opacity: 1;
-}
-
-
-.dot.on {
-  background: #ffd766;
-  box-shadow: 0 0 8px rgba(255, 215, 102, 0.8)
 }
 
 /* fallback open button (hidden unless popup blocked) */

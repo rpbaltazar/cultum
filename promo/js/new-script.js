@@ -1,6 +1,6 @@
     (function () {
 
-      const DOT_COUNT = 20;       // total dots
+      const DOT_COUNT = 3;       // total dots
       const SPECIAL_COUNT = 3;    // special glowing ones
 
       const svg = document.getElementById('dot-scene');
