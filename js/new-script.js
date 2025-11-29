@@ -41,7 +41,7 @@
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute('cx', pos.x);
     circle.setAttribute('cy', pos.y);
-    circle.setAttribute('r', 8); // radius
+    circle.setAttribute('r', 4); // radius
     circle.classList.add('dot');
     circle.dataset.id = `dot-${i + 1}`;
 
