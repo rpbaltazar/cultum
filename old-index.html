@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stars — Interactive</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --star: #ffd766;
+      --muted: #9aa3b2
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #071024 100%);
+      color: #fff
+    }
+
+    .wrap {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box
+    }
+
+    .card {
+      width: 100%;
+      max-width: 720px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+      text-align: center
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 20px
+    }
+
+    p.lead {
+      margin: 0 0 18px;
+      color: var(--muted)
+    }
+
+    /* image area */
+    .scene {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      max-height: 360px
+    }
+
+    /* Pulsating glow animation for all stars */
+    @keyframes starPulse {
+      0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
+      }
+
+      50% {
+        transform: scale(1.01);
+        filter: drop-shadow(0 0 10px rgba(255, 215, 102, 0.7));
+      }
+
+      100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 215, 102, 0.3));
+      }
+    }
+
+    /* star styles */
+    .star {
+      cursor: pointer;
+      transform-origin: center center;
+      transition: transform .18s ease, filter .18s ease;
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.6));
+      animation: starPulse 2.4s ease-in-out infinite;
+    }
+
+    .star-base {
+      fill: var(--star);
+      opacity: 0.9
+    }
+
+    .star.glow {
+      filter: drop-shadow(0 6px 18px rgba(255, 215, 102, 0.55)) saturate(130%);
+      transform: scale(1.12)
+    }
+
+    .star.visited .star-base {
+      opacity: 1
+    }
+
+    /* special stars slightly bigger by default */
+    .star.special {
+      transform: scale(1);
+    }
+
+    /* when hovered or touched */
+    .star.special.hover .star-base,
+    .star.special:focus .star-base {
+      filter: brightness(1.1)
+    }
+
+    /* indicators */
+    .status {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted)
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 6px;
+      background: #2f3a4b;
+      vertical-align: middle
+    }
+
+    .dot.on {
+      background: #ffd766;
+      box-shadow: 0 0 8px rgba(255, 215, 102, 0.8)
+    }
+
+    /* fallback open button (hidden unless popup blocked) */
+    .open-fallback {
+      display: none;
+      margin-top: 14px
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #ffd766;
+      color: #052;
+      cursor: pointer;
+      border: none;
+      font-weight: 600
+    }
+
+    /* small screens */
+    @media (max-width:420px) {
+      h1 {
+        font-size: 18px
+      }
+
+      svg {
+        max-height: 300px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+      <h1>Star Field — interact with the special stars</h1>
+      <p class="lead">Hover or touch the three special stars. After you've visited each of the three, a new page will
+        open.</p>
+
+      <div class="scene" aria-hidden="false">
+        <!-- SVG image with stars -->
+        <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" aria-label="Stars image">
+          <defs>
+            <path id="starPath"
+              d="M50 0 L61.8 34.5 L98.5 36.6 L69.3 59.1 L79.4 94.5 L50 74.9 L20.6 94.5 L30.7 59.1 L1.5 36.6 L38.2 34.5 Z" />
+          </defs>
+
+          <!-- Background subtle gradient circle -->
+          <rect width="100%" height="100%" fill="none" />
+
+          <g transform="translate(60,60) scale(1.6)">
+            <g class="star" data-id="s1" tabindex="0" aria-label="star 1">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
+
+          <g transform="translate(160,120) scale(1.2)">
+            <g class="star" data-id="s2" tabindex="0" aria-label="star 2">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
+
+          <g transform="translate(260,50) scale(0.9)">
+            <g class="star" data-id="s3" tabindex="0" aria-label="star 3">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
+
+          <g transform="translate(420,120) scale(1.5)">
+            <g class="star" data-id="s4" tabindex="0" aria-label="star 4">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
+
+          <g transform="translate(560,70) scale(1.7)">
+            <g class="star" data-id="s5" tabindex="0" aria-label="star 5">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
+
+          <g transform="translate(680,170) scale(1.3)">
+            <g class="star" data-id="s6" tabindex="0" aria-label="star 6">
+              <use class="star-base" href="#starPath" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="status" id="status">Special visited:
+        <span class="dot" id="dot-1"></span>
+        <span class="dot" id="dot-2"></span>
+        <span class="dot" id="dot-3"></span>
+      </div>
+
+      <div class="open-fallback" id="fallback">
+        <p style="color:var(--muted);margin:8px 0 10px">Automatic opening was blocked by the browser — tap the button to
+          continue.</p>
+        <button class="btn" id="openBtn">Open the target page</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // URL to open when all three visited. Change as desired.
+      const TARGET_URL = 'https://cultumcosmetics.com/';
+      const SPECIAL_COUNT = 3;
+
+      const stars = Array.from(document.querySelectorAll('.star'));
+      // console.log(stars);
+      const specials = randomElements(stars, SPECIAL_COUNT);
+      // console.log(specials);
+
+      const visited = new Set();
+      let opened = false;
+
+      function markVisited(id) {
+        if (visited.has(id)) return;
+        visited.add(id);
+
+        const dot = document.getElementById('dot-' + visited.size);
+        if (dot) dot.classList.add('on');
+
+        // mark the svg element with visited for styling
+        const el = document.querySelector(`.star[data-id="${id}"]`);
+        if (el) el.classList.add('visited');
+
+        if (visited.size === 3 && !opened) {
+          // try to open new tab/window
+          tryOpen();
+        }
+      }
+
+      function tryOpen() {
+        opened = true;
+        const newWin = window.open(TARGET_URL, '_blank');
+        if (!newWin || newWin.closed === undefined) {
+          // popup blocked — show fallback button
+          const fb = document.getElementById('fallback');
+          fb.style.display = 'block';
+        } else {
+          // focus the new window/tab if possible
+          try { newWin.focus(); } catch (e) { }
+        }
+      }
+
+      function randomElements(arr, n) {
+        if (n > arr.length) {
+          throw new Error("Requested more elements than available");
+        }
+
+        // Make a copy so we don't mutate the original array
+        const copy = arr.slice();
+        const selected = [];
+
+        for (let i = 0; i < n; i++) {
+          const index = Math.floor(Math.random() * copy.length);
+          selected.push(copy[index]);
+          copy.splice(index, 1); // remove chosen element to avoid duplicates
+        }
+
+        return selected;
+      }
+
+
+      // Add event listeners to special stars
+      specials.forEach(function (g) {
+        g.classList.add('special');
+
+        const id = g.getAttribute('data-id');
+
+        // on hover / pointer enter
+        g.addEventListener('pointerenter', function (ev) {
+          g.classList.add('hover');
+          markVisited(id);
+        });
+        g.addEventListener('pointerleave', function (ev) {
+          g.classList.remove('hover');
+        });
+
+        // also support touchstart (mobile) — touch will usually also fire pointer events, but this ensures responsiveness
+        g.addEventListener('touchstart', function (ev) {
+          g.classList.add('hover');
+          markVisited(id);
+          // remove hover after short time so it doesn't stick
+          setTimeout(() => g.classList.remove('hover'), 800);
+        }, { passive: true });
+
+        // keyboard accessibility: Enter/Space should also count as visit and trigger open (this is a clear user gesture)
+        g.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter' || ev.key === ' ') {
+            ev.preventDefault();
+            markVisited(id);
+            // give a visual cue
+            g.classList.add('hover');
+            setTimeout(() => g.classList.remove('hover'), 400);
+          }
+        });
+
+        // make sure clicking also counts (not required but safe)
+        g.addEventListener('click', function (ev) {
+          markVisited(id);
+        });
+      });
+
+      document.addEventListener('touchmove', function (ev) {
+        const touch = ev.touches[0]; // first finger
+        const x = touch.clientX;
+        const y = touch.clientY;
+
+        specials.forEach(star => {
+          const rect = star.getBoundingClientRect();
+          if (
+            x >= rect.left &&
+            x <= rect.right &&
+            y >= rect.top &&
+            y <= rect.bottom
+          ) {
+            const id = star.getAttribute('data-id');
+            // mark visited if not already
+            markVisited(id);
+            // add hover effect briefly
+            star.classList.add('hover');
+            setTimeout(() => star.classList.remove('hover'), 300);
+          }
+        });
+      }, { passive: true });
+
+
+      // fallback open button
+      document.getElementById('openBtn').addEventListener('click', function () {
+        tryOpen();
+      });
+
+      // Prevent accidental text selection while tapping/dragging on mobile
+      document.addEventListener('touchmove', function (ev) { ev.preventDefault(); }, { passive: false });
+    })();
+  </script>
+</body>
+
+</html>
