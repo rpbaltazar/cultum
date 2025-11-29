@@ -3,11 +3,13 @@
   const DOT_COUNT = 3;       // total dots
   const SPECIAL_COUNT = 3;    // special glowing ones
   const MIN_DISTANCE = 30;    // minimum distance between dots in pixels
+  const WEBSITE = "https://cultumcosmetics.com/products/alchimie-d-incanto";
 
   const svg = document.getElementById('dot-scene');
   const sceneRect = svg.getBoundingClientRect();
 
   const allDots = [];
+  var opened = false;
 
   function getRandomPosition() {
     return {
@@ -60,8 +62,9 @@
     const entry = allDots.find(d => d.el.dataset.id === id);
     if (entry) entry.el.classList.add('visited');
 
-    if (visited.size === SPECIAL_COUNT) {
-      window.open('https://example.com', '_blank');
+    if (visited.size === SPECIAL_COUNT && !opened) {
+      opened = true;
+      showPopup();
     }
   }
 
@@ -201,4 +204,24 @@
 
   // Prevent accidental text selection while tapping/dragging on mobile
   document.addEventListener('touchmove', function (ev) { ev.preventDefault(); }, { passive: false });
+
+  function showPopup() {
+  const overlay = document.getElementById('popup');
+  overlay.classList.add('show');
+
+  // Close handlers
+  document.getElementById('popup-close').onclick = () => overlay.classList.remove('show');
+  overlay.onclick = e => { if(e.target === overlay) overlay.classList.remove('show'); };
+
+  // CTA button opens new page
+  document.getElementById('popup-cta').onclick = () => {
+    window.open(WEBSITE, '_blank');
+  };
+}
+
+// Instead of window.open, call showPopup() after visiting all special stars
+function tryOpenPopup() {
+  showPopup();
+}
+
 })();
