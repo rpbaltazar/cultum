@@ -65,3 +65,17 @@ body #locksmith-content .rte {
 #locksmith-content .locksmith-resource-form p {
   text-align: center;
 }
+
+#locksmith-content .locksmith-resource-form h1 {
+  text-align: center;
+  color: #fff;
+}
+
+.locksmith-text-block {
+    margin-block-end: 2em;
+}
+
+.locksmith-passcode {
+    width: 70% !important;
+    margin-left: 15%;
+}
