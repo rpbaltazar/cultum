@@ -1,41 +1,44 @@
 {{ 'giardino-segreto.css' | asset_url | stylesheet_tag }}
 
 {%-  liquid
-    assign cart_items = cart_items
-    assign lotion_in_cart = false
-    assign total_items = 0
+  assign cart_items = cart_items
+  assign lotion_in_cart = false
+  assign total_items = 0
 
-    for item in cart_items
-        assign total_items = total_items | plus: item.quantity
-        if item.product.tags contains 'giardino-segreto'
-            assign lotion_in_cart = true
-        endif
-    endfor
-
-    assign qualifies_by_quantity = false
-    if total_items >= 3
-        assign qualifies_by_quantity = true
+  for item in cart_items
+    assign total_items = total_items | plus: item.quantity
+    if item.product.tags contains 'giardino-segreto'
+      assign lotion_in_cart = true
     endif
+  endfor
 
-    assign qualifies_by_lotion = lotion_in_cart
+  assign qualifies_by_quantity = false
+  if total_items >= 3
+    assign qualifies_by_quantity = true
+  endif
 
-    assign show_message = false
-    assign missing = 0
+  assign qualifies_by_lotion = lotion_in_cart
 
-    if qualifies_by_quantity == false and qualifies_by_lotion == false
-        if total_items < 3
-            assign show_message = true
-            assign missing = 3 | minus: total_items
-        endif
-    else
-        assign qualifies = true
+  assign show_message = false
+  assign missing = 0
+
+  if qualifies_by_quantity == false and qualifies_by_lotion == false
+    if total_items < 3
+      assign show_message = true
+      assign missing = 3 | minus: total_items
     endif
+  else
+    assign qualifies = true
+  endif
 -%}
 
 {% if show_message %}
   <div class="booster-message">
-    You're missing {{ missing }} product{% if missing > 1 %}s{% endif %}
-    to get a surprise in your mail 🎁
+    Ti manc{% if missing > 1 %}ano{% else %}a{% endif %}
+    {{ missing }}
+    prodott{% if missing > 1 %}i{% else %}o{% endif %}
+    per ricevere la chiave del Giardino Segreto. 🗝️
+Aggiungi una Lotion e accedi subito.
   </div>
 {% endif %}
 
