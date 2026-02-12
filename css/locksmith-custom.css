@@ -1,0 +1,38 @@
+/* Locksmith Fullscreen Hero */
+
+#locksmith-content {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#locksmith-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("//cultumcosmetics.com/cdn/shop/files/cultum_il_giardino_segreto_banner.png");
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+#locksmith-content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+#locksmith-content .section,
+#locksmith-content .locksmith-content-inner {
+  position: relative;
+  z-index: 3;
+  color: white;
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 60px;
+}
