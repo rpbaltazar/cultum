@@ -1,8 +1,33 @@
-/* Locksmith Fullscreen Hero */
+/* Unlock full width for locksmith hero */
+
+body #locksmith-content,
+body #locksmith-content .section,
+body #locksmith-content .locksmith-content-inner {
+  max-width: none !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Center text block and give nice spacing */
+body #locksmith-content .locksmith-content-inner > * {
+  margin: 0 auto;
+  max-width: 800px; /* adjust as needed */
+  padding: 60px 20px;
+}
+
+/* Optional: bigger typography */
+body #locksmith-content .rte {
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
 
 #locksmith-content {
   position: relative;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,4 +60,8 @@
   max-width: 650px;
   margin: 0 auto;
   padding: 60px;
+}
+
+#locksmith-content .locksmith-resource-form p {
+  text-align: center;
 }
