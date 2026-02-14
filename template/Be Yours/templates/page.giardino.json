@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "gate": {
+      "type": "giardino-gate"
+    }
+  },
+  "order": ["gate"]
+}
