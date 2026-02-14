@@ -12,6 +12,30 @@
       "type": "image_picker",
       "id": "background",
       "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "buttonText",
+      "label": "Button Text",
+      "default": "Esplora"
+    },
+    {
+      "type": "text",
+      "id": "passwordInput",
+      "label": "Password Placeholder",
+      "default": "Inserisci la chiave"
+    },
+    {
+      "type": "text",
+      "id": "gateTitle",
+      "label": "Gate Title",
+      "default": "Il Giardino Segreto"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Con l’acquisto di tre prodotti riceverai la chiave per accedere al Giardino Segreto. Con una Lotion, l’accesso è immediato. Vai allo <a href=\"/collections/all\">SHOP</a></p>"
     }
   ],
   "presets": [
@@ -33,15 +57,13 @@
     <div class="giardino-overlay"></div>
 
     <div class="giardino-content">
-      <h1>Il Giardino Segreto</h1>
+      <h1>{{section.settings.gateTitle}}</h1>
 
-      <input type="password" id="giardinoInput" placeholder="Inserisci la chiave">
-      <button id="giardinoButton">Continua</button>
+      <input type="password" id="giardinoInput" placeholder="{{ section.settings.passwordInput }}">
+      <button id="giardinoButton">"{{ section.settings.buttonText }}"</button>
 
-      <p class="giardino-subtext">
-        Con l’acquisto di tre prodotti riceverai la chiave per accedere al Giardino Segreto.
-        Con una Lotion, l’accesso è immediato.
-        Vai allo <a href="/collections/all">SHOP</a>
+      <p class="giardino-subtext rte">
+        {{ section.settings.subtext }}
       </p>
     </div>
   </div>
